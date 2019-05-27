@@ -30,17 +30,9 @@ var config =
 };
 firebase.initializeApp(config);
 
-$("#submit-input").on("click", function () {
-    event.preventDefault();
-    var trainName = $("#train-name").val();
-    var trainDest = $("#train-destination").val();
-    var trainFreq = $("#train-frequency").val();
-    var trainTime = $("#train-first-time").val();
+var frequency = 0;
 
-    database.ref().push({
-        trainName: trainName,
-        trainDest: trainDest,
-        trainFreq: trainFreq,
-        trainTime: trainTime,
-    });
-});
+var currentTime = moment();
+console.log("CURRENT TIME: " + moment(currentTime).format("hh:mm"));
+$("#timeNow").text(currentTime);
+
