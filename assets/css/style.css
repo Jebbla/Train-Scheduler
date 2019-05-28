@@ -8,7 +8,30 @@
     bottom: 0;
     left: 0;
 }
+
+.jumbotron{
+    text-align: center;
+    font-family: 'Domine', serif;
+    font-size: 24px;
+    background: black;
+    color: whitesmoke;
+}
 #timeNow {
     text-align: center;
     font-family: 'Domine', serif;
+    font-size: 18px;
 }
+
+thead th  {
+    border: 2px solid black;
+    text-align: center;
+}
+table {
+    width: 100%;
+    font-family: 'Domine', serif;
+  }
+  
+  th {
+    height: 30px;
+    text-align: left;
+  }
