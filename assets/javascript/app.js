@@ -9,7 +9,7 @@ var granimInstance = new Granim({
     states : {
         "default-state": {
             gradients: [
-                ['#29323c', '#485563'],
+                ['#235432', '#483789'],
                 ['#FF6B6B', '#556270'],
                 ['#80d3fe', '#7ea0c4'],
                 ['#f0ab51', '#eceba3']
@@ -20,19 +20,70 @@ var granimInstance = new Granim({
 });
 var config = 
 {
-    apiKey: "AIzaSyDldQc5kJXoZ2Xw1PLXJwHSou-jLhKQjjc",
-      authDomain: "jebbla-train-sceduler.firebaseapp.com",
-      databaseURL: "https://jebbla-train-sceduler.firebaseio.com",
-      projectId: "jebbla-train-sceduler",
-      storageBucket: "jebbla-train-sceduler.appspot.com",
-      messagingSenderId: "797932428455",
-      appId: "1:797932428455:web:69114ee6b33841ea"
+    apiKey: "AIzaSyBIjeDuHNravF4irOmhcIDI4FlWOGPh_-s",
+    authDomain: "class-7be17.firebaseapp.com",
+    databaseURL: "https://class-7be17.firebaseio.com",
+    projectId: "class-7be17",
+    storageBucket: "class-7be17.appspot.com",
+    messagingSenderId: "115562070662",
+    appId: "1:115562070662:web:038e6c68cdfdd09b"
 };
 firebase.initializeApp(config);
+var database = firebase.database();
 
 var frequency = 0;
 
+
 var currentTime = moment();
+
 console.log("CURRENT TIME: " + moment(currentTime).format("hh:mm"));
 $("#timeNow").text(currentTime);
+
+
+
+//$("#submit").on("click", function() 
+$("#train-submit").on("click", function () {
+    event.preventDefault();
+ console.log("hi do i work?");
+
+    var trainName = $("#train-name").val().trim();
+    var trainDest = $("#train-destination").val().trim();
+    var trainFreq = $("#train-frequency").val().trim();
+    var trainTime = $("#train-first-time").val().trim();
+
+    database.ref().push({
+        trainName: trainName,
+        trainDest: trainDest,
+        trainFreq: trainFreq,
+        trainTime: trainTime,
+    });
+
+    console.log(trainName);
+//clears input
+    $("#train-name").val("");
+    $("#train-destination").val("");
+    $("#train-frequency").val("");
+    $("#train-first-time").val("");
+
+
+});
+database.ref().on("child_added", function(childSnapshot) {
+  console.log(childSnapshot.val());
+
+  var trainName = childSnapshot.val().trainName;
+  var trainDest = childSnapshot.val().trainDest;
+  var trainFreq = childSnapshot.val().trainFreq;
+  var trainTime = childSnapshot.val().trainTime;
+  
+  var newRow = $("<tr>").append( 
+    $("<td>").text(trainName),
+    $("<td>").text(trainDest),
+    $("<td>").text(trainTime),
+    $("<td>").text(trainFreq),
+  )
+    $("#train-table > tbody").append(newRow);
+
+  });
+
+
 
